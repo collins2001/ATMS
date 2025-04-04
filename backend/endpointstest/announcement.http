@@ -1,0 +1,33 @@
+### Get all announcements
+GET http://localhost:5000/api/announcements
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+### Get announcement by ID
+GET http://localhost:5000/api/announcements/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+### Create new announcement (Admin only)
+POST http://localhost:5000/api/announcements
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+{
+  "title": "Important System Update",
+  "content": "The system will be under maintenance this weekend",
+  "ImageURL": "https://example.com/maintenance.jpg"
+}
+
+### Update announcement (Admin only)
+PUT http://localhost:5000/api/announcements/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+{
+  "title": "Updated: System Maintenance",
+  "content": "The maintenance has been rescheduled to next weekend",
+  "ImageURL": "https://i.pinimg.com/736x/2e/07/2f/2e072f659a54c9038d250546749dff9b.jpg"
+}
+
+### Delete announcement (Admin only)
+DELETE http://localhost:5000/api/announcements/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0 

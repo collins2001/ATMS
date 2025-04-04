@@ -1,0 +1,35 @@
+### Get all notes
+GET http://localhost:5000/api/notes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+### Get note by ID
+GET http://localhost:5000/api/notes/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+### Create new note
+POST http://localhost:5000/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+{
+  "course": "CS101",
+  "title": "Introduction to Programming",
+  "description": "Basic concepts of programming",
+  "fileUrl": "https://example.com/notes.pdf"
+}
+
+### Update note
+PUT http://localhost:5000/api/notes/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+{
+  "course": "CS101",
+  "title": "Updated: Programming Basics",
+  "description": "Updated basic concepts of programming",
+  "fileUrl": "https://irp-cdn.multiscreensite.com/cb9165b2/files/uploaded/The+48+Laws+Of+Power.pdf"
+}
+
+### Delete note
+DELETE http://localhost:5000/api/notes/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0 

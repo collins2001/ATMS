@@ -1,0 +1,50 @@
+GET http://localhost:5000/api/users/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+
+###
+
+GET http://localhost:5000/api/auth/me
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+ 
+###
+
+# POST http://localhost:5000/api/users/
+# Content-Type: application/json
+
+# {
+#   "name": "New User",
+#   "email": "newuser@example.com",
+#   "password": "password123",
+#   "role": "student"
+# }
+
+
+
+
+### register
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+
+{
+  "name": "New UserA",
+  "email": "newuserA@example.com",
+  "password": "password123A",
+  "role": "admin"
+}
+
+
+### login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "newuser@example.com",
+  "password": "password123"
+  
+}
+
+
+
+
+
