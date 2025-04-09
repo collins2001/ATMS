@@ -5,7 +5,8 @@ const authService = require('../services/authService');
 
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
+    const role = 'student'; // Default role for all new registrations
 
     // Check if user already exists
     const existingUser = await User.findOne({ where: { email } });
@@ -14,7 +15,7 @@ exports.register = async (req, res) => {
     }
 
     // Validate required fields
-    if (!name || !email || !password || !role) {
+    if (!name || !email || !password) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
@@ -27,12 +28,6 @@ exports.register = async (req, res) => {
     // Validate password length
     if (password.length < 6) {
       return res.status(400).json({ error: 'Password must be at least 6 characters long' });
-    }
-
-    // Validate role
-    const validRoles = ['student', 'class_rep', 'admin'];
-    if (!validRoles.includes(role)) {
-      return res.status(400).json({ error: 'Invalid role' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);

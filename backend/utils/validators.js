@@ -31,8 +31,7 @@ exports.schemas = {
   register: {
     name: { type: 'string', required: true },
     email: { type: 'string', required: true, validate: exports.validateEmail },
-    password: { type: 'string', required: true, validate: exports.validatePassword },
-    role: { type: 'string', required: true, validate: exports.validateRole }
+    password: { type: 'string', required: true, validate: exports.validatePassword }
   },
   login: {
     email: { type: 'string', required: true },
