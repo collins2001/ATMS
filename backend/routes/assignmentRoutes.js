@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const assignmentController = require('../controllers/assignmentController');
+const { authenticateToken, authorize } = require('../middlewares/authMiddleware');
+const { validateRequest } = require('../middlewares/validationMiddleware');
+const { ROLES } = require('../utils/constants');
 
 // Test route to add sample data
 router.get('/test/add-samples', async (req, res) => {
@@ -29,14 +32,37 @@ router.get('/test/add-samples', async (req, res) => {
   }
 });
 
-// Basic CRUD operations
-router.get('/', assignmentController.getAssignments);
-router.get('/:id', assignmentController.getAssignment);
-router.post('/', assignmentController.createAssignment);
-router.put('/:id', assignmentController.updateAssignment);
-router.delete('/:id', assignmentController.deleteAssignment);
+// Get all assignments - accessible by all authenticated users
+router.get('/', authenticateToken, authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), assignmentController.getAssignments);
+
+// Get single assignment - accessible by all authenticated users
+router.get('/:id', authenticateToken, authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), assignmentController.getAssignment);
+
+// Create assignment - restricted to admin and class rep
+router.post('/', 
+  authenticateToken,
+  authorize([ROLES.ADMIN, ROLES.CLASS_REP]),
+  validateRequest('assignment'),
+  assignmentController.createAssignment
+);
+
+// Update assignment - restricted to admin and class rep
+router.put('/:id', 
+  authenticateToken,
+  authorize([ROLES.ADMIN, ROLES.CLASS_REP]),
+  validateRequest('assignment'),
+  assignmentController.updateAssignment
+);
+
+// Delete assignment - restricted to admin and class rep
+router.delete('/:id', 
+  authenticateToken,
+  authorize([ROLES.ADMIN, ROLES.CLASS_REP]),
+  assignmentController.deleteAssignment
+);
 
 // Additional routes
-router.get('/course/:courseId', assignmentController.getAssignmentsByCourse);
+router.get('/course/:courseId', authenticateToken, authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), assignmentController.getAssignmentsByCourse);
+router.get('/upcoming', authenticateToken, authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), assignmentController.getUpcomingAssignments);
 
 module.exports = router; 

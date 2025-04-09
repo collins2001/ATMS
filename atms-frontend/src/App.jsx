@@ -10,6 +10,7 @@ import ClassRepDashboard from './components/pages/ClassRepDashboard';
 import StudentDashboard from './components/pages/StudentDashboard';
 import NotificationsPage from './components/pages/NotificationsPage';
 import SettingsPage from './components/pages/SettingsPage';
+import ProfilePage from './components/pages/ProfilePage';
 
 // Admin Components (reused for class reps)
 import AdminDashboard from './components/admin/AdminDashboard';
@@ -34,17 +35,22 @@ import UserManagement from './components/admin/UserManagement';
 // Student Components
 import StudentAnnouncements from './components/student/StudentAnnouncements';
 import StudentNotes from './components/student/StudentNotes';
+import StudentAssignments from './components/student/StudentAssignments';
 
 // Protected Route Component
-const ProtectedRoute = ({ children, allowedRoles = [] }) => {
-  const { user, isAuthenticated } = useAuth();
+const ProtectedRoute = ({ children, allowedRoles }) => {
+  const { user, loading } = useAuth();
 
-  if (!isAuthenticated) {
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
     return <Navigate to="/login" />;
   }
 
-  if (allowedRoles.length > 0 && !allowedRoles.includes(user?.role)) {
-    return <Navigate to="/dashboard" />;
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/" />;
   }
 
   return children;
@@ -103,7 +109,7 @@ function App() {
         <Route path="/assignments" element={
           <ProtectedRoute allowedRoles={['student', 'class_rep', 'admin']}>
             <Layout>
-              <Assignment />
+              <AssignmentsRouter />
             </Layout>
           </ProtectedRoute>
         } />
@@ -275,11 +281,25 @@ function App() {
           </ProtectedRoute>
         } />
 
+        {/* Profile Route */}
+        <Route path="/profile" element={
+          <ProtectedRoute allowedRoles={['student', 'class_rep', 'admin']}>
+            <Layout>
+              <ProfilePage />
+            </Layout>
+          </ProtectedRoute>
+        } />
+
         {/* Redirect root to appropriate dashboard */}
         <Route path="/" element={<Navigate to={getDefaultDashboard()} />} />
       </Routes>
     </div>
   );
 }
+
+const AssignmentsRouter = () => {
+  const { user } = useAuth();
+  return user?.role === 'student' ? <StudentAssignments /> : <Assignment />;
+};
 
 export default App; 

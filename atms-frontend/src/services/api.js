@@ -38,8 +38,15 @@ api.interceptors.response.use(
   (error) => {
     // Handle 401 Unauthorized errors
     if (error.response?.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+      // Only remove token and redirect if we have a token
+      const token = localStorage.getItem('token');
+      if (token) {
+        console.log('Token exists but received 401, removing token and redirecting to login');
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+      } else {
+        console.log('No token found, already logged out');
+      }
     }
     
     console.error('API Error:', error.response || error);

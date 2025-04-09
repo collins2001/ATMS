@@ -13,17 +13,17 @@ const Button = ({
   className = '',
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors';
+  const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200';
   
   const variantClasses = {
-    primary: 'text-white bg-primary hover:bg-primary-dark focus:ring-primary',
-    secondary: 'text-white bg-secondary hover:bg-secondary-dark focus:ring-secondary',
-    success: 'text-white bg-success hover:bg-success-dark focus:ring-success',
-    danger: 'text-white bg-danger hover:bg-danger-dark focus:ring-danger',
-    warning: 'text-white bg-warning hover:bg-warning-dark focus:ring-warning',
-    info: 'text-white bg-info hover:bg-info-dark focus:ring-info',
-    outline: 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:ring-primary',
-    ghost: 'text-gray-700 bg-transparent hover:bg-gray-50 focus:ring-primary'
+    primary: 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 shadow-sm',
+    secondary: 'text-white bg-gray-600 hover:bg-gray-700 focus:ring-gray-500 shadow-sm',
+    success: 'text-white bg-green-600 hover:bg-green-700 focus:ring-green-500 shadow-sm',
+    danger: 'text-white bg-red-600 hover:bg-red-700 focus:ring-red-500 shadow-sm',
+    warning: 'text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-500 shadow-sm',
+    info: 'text-white bg-blue-500 hover:bg-blue-600 focus:ring-blue-500 shadow-sm',
+    outline: 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 focus:ring-blue-500',
+    ghost: 'text-gray-700 bg-transparent hover:bg-gray-50 focus:ring-blue-500'
   };
 
   const sizeClasses = {
@@ -33,7 +33,7 @@ const Button = ({
   };
 
   const widthClass = fullWidth ? 'w-full' : '';
-  const disabledClass = disabled ? 'opacity-50 cursor-not-allowed' : '';
+  const disabledClass = disabled ? 'opacity-60 cursor-not-allowed' : '';
   const loadingClass = loading ? 'cursor-wait' : '';
 
   const buttonClasses = [
@@ -55,25 +55,9 @@ const Button = ({
       {...props}
     >
       {loading && (
-        <svg
-          className="animate-spin -ml-1 mr-2 h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            className="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            strokeWidth="4"
-          />
-          <path
-            className="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-          />
+        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
       )}
       {children}
