@@ -3,10 +3,24 @@ import api from './api';
 const authService = {
   login: async (credentials) => {
     try {
+      console.log('Sending login request with credentials:', credentials);
       const response = await api.post('/auth/login', credentials);
-      if (response.token) {
-        localStorage.setItem('token', response.token);
+      console.log('Raw login response:', response);
+      
+      // Check if response is undefined or null
+      if (!response) {
+        console.error('Login response is undefined or null');
+        throw new Error('Server returned an empty response');
       }
+      
+      // Store token if available
+      if (response.token) {
+        console.log('Storing token in localStorage');
+        localStorage.setItem('token', response.token);
+      } else {
+        console.warn('No token found in login response');
+      }
+      
       return response;
     } catch (error) {
       console.error('Login error:', error);
@@ -21,9 +35,22 @@ const authService = {
     try {
       console.log('Registering with data:', userData);
       const response = await api.post('/auth/register', userData);
-      if (response.token) {
-        localStorage.setItem('token', response.token);
+      console.log('Raw register response:', response);
+      
+      // Check if response is undefined or null
+      if (!response) {
+        console.error('Register response is undefined or null');
+        throw new Error('Server returned an empty response');
       }
+      
+      // Store token if available
+      if (response.token) {
+        console.log('Storing token in localStorage');
+        localStorage.setItem('token', response.token);
+      } else {
+        console.warn('No token found in register response');
+      }
+      
       return response;
     } catch (error) {
       console.error('Registration error:', error);
@@ -44,7 +71,9 @@ const authService = {
 
   getCurrentUser: async () => {
     try {
-      return await api.get('/auth/me');
+      const response = await api.get('/auth/me');
+      // The response is already the data object from the API interceptor
+      return response;
     } catch (error) {
       console.error('Get current user error:', error);
       if (error.validationErrors) {

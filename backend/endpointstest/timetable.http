@@ -1,21 +1,20 @@
 ### Get all timetables
 GET http://localhost:5000/api/timetables
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NDE1MzE1MiwiZXhwIjoxNzQ0MjM5NTUyfQ.yUocjJLMOh7TsEWTCLfG2YYEzk3T34o9iEAE6F5G7dE
 ### Get timetable by ID
 GET http://localhost:5000/api/timetables/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NDE1MzE1MiwiZXhwIjoxNzQ0MjM5NTUyfQ.yUocjJLMOh7TsEWTCLfG2YYEzk3T34o9iEAE6F5G7dE
 
 ### Create new timetable entry
 POST http://localhost:5000/api/timetables
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzg3ODUzMCwiZXhwIjoxNzQzOTY0OTMwfQ.zqZVAhFWHk19q8XMY4kDIO3iKjNqbNjeTy2w6Y1MjCw
 
 {
-  "courseId": "CS104",
+  "courseId": "CS109",
   "dayOfWeek": "Monday",
-  "startTime": "15:00:00",
-  "endTime": "17:30:00",
+  "startTime": "19:00:00",
+  "endTime": "20:30:00",
   "room": "Room 101"
 }
 
@@ -74,4 +73,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiO
 
 ### Check room availability
 GET http://localhost:5000/api/timetables/availability/Room%20101?date=2024-04-04&startTime=09:00&endTime=10:30
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NDE1MzE1MiwiZXhwIjoxNzQ0MjM5NTUyfQ.yUocjJLMOh7TsEWTCLfG2YYEzk3T34o9iEAE6F5G7dE

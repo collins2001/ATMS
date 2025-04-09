@@ -1,33 +1,42 @@
 const express = require('express');
 const router = express.Router();
 const assignmentController = require('../controllers/assignmentController');
-const { authenticateToken, authorize } = require('../middlewares/authMiddleware');
-const { validateRequest } = require('../middlewares/validationMiddleware');
-const { ROLES } = require('../utils/constants');
 
-// Apply authentication middleware to all routes
-router.use(authenticateToken);
+// Test route to add sample data
+router.get('/test/add-samples', async (req, res) => {
+  try {
+    const sampleAssignments = [
+      {
+        title: "Test Assignment 1",
+        description: "This is a test assignment",
+        course: "CS101",
+        dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days from now
+      },
+      {
+        title: "Test Assignment 2",
+        description: "Another test assignment",
+        course: "CS102",
+        dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000) // 14 days from now
+      }
+    ];
+
+    const Assignment = require('../models/Assignment');
+    await Assignment.bulkCreate(sampleAssignments);
+    res.json({ message: "Sample assignments created" });
+  } catch (error) {
+    console.error('Error creating samples:', error);
+    res.status(500).json({ error: "Failed to create samples" });
+  }
+});
 
 // Basic CRUD operations
-router.get('/', authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), assignmentController.getAssignments);
-router.get('/:id', authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), assignmentController.getAssignment);
-router.post('/', 
-    authorize([ROLES.ADMIN]), 
-    validateRequest('assignment'), 
-    assignmentController.createAssignment
-);
-router.put('/:id', 
-    authorize([ROLES.ADMIN]), 
-    validateRequest('assignment'), 
-    assignmentController.updateAssignment
-);
-router.delete('/:id', 
-    authorize([ROLES.ADMIN]), 
-    assignmentController.deleteAssignment
-);
+router.get('/', assignmentController.getAssignments);
+router.get('/:id', assignmentController.getAssignment);
+router.post('/', assignmentController.createAssignment);
+router.put('/:id', assignmentController.updateAssignment);
+router.delete('/:id', assignmentController.deleteAssignment);
 
-// Specialized routes
-router.get('/upcoming', authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), assignmentController.getUpcomingAssignments);
-router.get('/course/:course', authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), assignmentController.getAssignmentsByCourse);
+// Additional routes
+router.get('/course/:courseId', assignmentController.getAssignmentsByCourse);
 
 module.exports = router; 

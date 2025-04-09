@@ -11,18 +11,18 @@ GET http://localhost:5000/api/assignments/course/CS101
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
 
 ### Get assignment by ID
-GET http://localhost:5000/api/assignments/1
+GET http://localhost:5000/api/assignments/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
 
 ### Create new assignment (Admin only)
-POST http://localhost:5000/api/assignments
+POST http://localhost:5000/api/assignments/c
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
 
 {
   "title": "Database Design Project",
   "description": "Create an ERD and implement the database schema",
-  "course": "CS101",
+  "course": "CS100",
   "dueDate": "2024-05-01T23:59:59Z",
   "fileUrl": "https://example.com/assignment1.pdf"
 }

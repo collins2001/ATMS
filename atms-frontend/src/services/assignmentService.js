@@ -5,6 +5,14 @@ export const assignmentService = {
     return api.get('/assignments');
   },
 
+  async getAssignmentsByCourseParam(course) {
+    return api.get(`/assignments?course=${course}`);
+  },
+
+  async getAssignmentsByCourse(courseId) {
+    return api.get(`/assignments/course/${courseId}`);
+  },
+
   async getAssignment(id) {
     return api.get(`/assignments/${id}`);
   },
@@ -19,6 +27,14 @@ export const assignmentService = {
 
   async deleteAssignment(id) {
     return api.delete(`/assignments/${id}`);
+  },
+
+  async getUpcomingAssignments() {
+    return api.get('/assignments/upcoming');
+  },
+
+  async getUpcomingAssignmentsByCourse(course) {
+    return api.get(`/assignments/upcoming?course=${course}`);
   },
 
   async submitAssignment(id, submissionData) {

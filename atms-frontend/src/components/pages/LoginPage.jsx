@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import Input from '../common/Input';
@@ -7,12 +7,34 @@ import Card from '../common/Card';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { login, error } = useAuth();
+  const { login, error, user } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [formErrors, setFormErrors] = useState({});
+
+  // Debug: Log auth context state
+  useEffect(() => {
+    console.log('Auth context state:', { user, error });
+  }, [user, error]);
+
+  // Redirect if user is already authenticated
+  useEffect(() => {
+    if (user) {
+      console.log('User is authenticated, redirecting based on role:', user.role);
+      if (user.role === 'admin') {
+        // Only admin users go to admin dashboard
+        navigate('/admin/dashboard', { replace: true });
+      } else if (user.role === 'class_rep') {
+        // Class reps go to their own dashboard
+        navigate('/class-rep/dashboard', { replace: true });
+      } else {
+        // Students go to student dashboard
+        navigate('/dashboard', { replace: true });
+      }
+    }
+  }, [user, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,9 +73,11 @@ const LoginPage = () => {
     }
 
     try {
+      console.log('Attempting login with:', formData);
       await login(formData);
-      navigate('/dashboard');
+      // Navigation will be handled by the useEffect hook when user state changes
     } catch (err) {
+      console.error('Login error:', err);
       setFormErrors(prev => ({
         ...prev,
         submit: err.message || 'Login failed'

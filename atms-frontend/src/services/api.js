@@ -7,7 +7,7 @@ const api = axios.create({
   },
 });
 
-// Request interceptor
+// Request interceptor to add auth token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -21,60 +21,32 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor
+// Response interceptor for basic error handling
 api.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    if (error.response) {
-      // Log the full error response for debugging
-      console.error('API Error Response:', error.response.data);
-
-      // Handle specific error cases
-      switch (error.response.status) {
-        case 401:
-          // Only remove token and redirect if not trying to login, register, or access public endpoints
-          if (!error.config.url.includes('/auth/login') && 
-              !error.config.url.includes('/auth/register') &&
-              !error.config.url.includes('/test')) {
-            localStorage.removeItem('token');
-            if (!window.location.pathname.includes('/login') && !window.location.pathname.includes('/register')) {
-              window.location.href = '/login';
-            }
-          }
-          break;
-        case 403:
-          console.error('Access forbidden');
-          break;
-        case 404:
-          console.error('Resource not found');
-          break;
-        case 500:
-          console.error('Server error');
-          break;
-        default:
-          console.error('An error occurred');
-      }
-
-      // Handle validation errors array
-      if (error.response.data.errors && Array.isArray(error.response.data.errors)) {
-        return Promise.reject({
-          message: error.response.data.errors.join(', '),
-          status: error.response.status,
-          data: error.response.data,
-          validationErrors: error.response.data.errors
-        });
-      }
-
-      // Return a rejected promise with the error message
-      return Promise.reject({
-        message: error.response.data.error || 'An unexpected error occurred',
-        status: error.response.status,
-        data: error.response.data
-      });
+  (response) => {
+    // Log the response for debugging
+    console.log('API Response:', response);
+    
+    // Check if response.data exists
+    if (response && response.data) {
+      return response.data;
     }
+    
+    // If no data property, return the entire response
+    return response;
+  },
+  (error) => {
+    // Handle 401 Unauthorized errors
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    
+    console.error('API Error:', error.response || error);
     return Promise.reject({
-      message: error.message || 'Network error occurred',
-      status: 0
+      message: error.response?.data?.message || error.response?.data?.error || 'An unexpected error occurred',
+      status: error.response?.status || 500,
+      data: error.response?.data
     });
   }
 );

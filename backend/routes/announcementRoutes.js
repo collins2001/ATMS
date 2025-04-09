@@ -13,18 +13,18 @@ router.get('/', authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), announ
 router.get('/:id', authorize([ROLES.ADMIN, ROLES.CLASS_REP, ROLES.STUDENT]), announcementController.getAnnouncement);
 
 // Admin-only routes
-router.post('/', 
-    authorize([ROLES.ADMIN]), 
-    validateRequest('announcement'), 
+router.post('/',
+    authorize([ROLES.ADMIN, ROLES.CLASS_REP]),
+    validateRequest('announcement'),
     announcementController.createAnnouncement
 );
-router.put('/:id', 
-    authorize([ROLES.ADMIN]), 
-    validateRequest('announcement'), 
+router.put('/:id',
+    authorize([ROLES.ADMIN, ROLES.CLASS_REP]),
+    validateRequest('announcement'),
     announcementController.updateAnnouncement
 );
-router.delete('/:id', 
-    authorize([ROLES.ADMIN]), 
+router.delete('/:id',
+    authorize([ROLES.ADMIN, ROLES.CLASS_REP]),
     announcementController.deleteAnnouncement
 );
 

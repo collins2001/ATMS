@@ -17,8 +17,21 @@ export const AuthProvider = ({ children }) => {
           return;
         }
         const response = await authService.getCurrentUser();
+        console.log('Get current user response:', response);
+        
+        // Handle different response structures
         if (response && response.user) {
+          // Direct user object in response
           setUser(response.user);
+          console.log('Setting user in AuthContext:', response.user);
+        } else if (response && response.data && response.data.user) {
+          // Nested user object in response.data
+          setUser(response.data.user);
+          console.log('Setting user in AuthContext (nested):', response.data.user);
+        } else {
+          console.error('Unexpected getCurrentUser response structure:', response);
+          localStorage.removeItem('token');
+          setError('Invalid user data format');
         }
       } catch (err) {
         console.error('Auth initialization error:', err);
@@ -37,11 +50,25 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       const response = await authService.login(credentials);
+      console.log('Login response in AuthContext:', response);
+      
+      // Handle different response structures
       if (response && response.user) {
+        // Direct user object in response
         setUser(response.user);
+        console.log('Setting user in AuthContext:', response.user);
+      } else if (response && response.data && response.data.user) {
+        // Nested user object in response.data
+        setUser(response.data.user);
+        console.log('Setting user in AuthContext (nested):', response.data.user);
+      } else {
+        console.error('Unexpected login response structure:', response);
+        throw new Error('Invalid login response format');
       }
+      
       return response;
     } catch (err) {
+      console.error('Login error in AuthContext:', err);
       setError(err.message);
       throw err;
     } finally {
@@ -67,9 +94,22 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       const response = await authService.register(userData);
+      console.log('Register response in AuthContext:', response);
+      
+      // Handle different response structures
       if (response && response.user) {
+        // Direct user object in response
         setUser(response.user);
+        console.log('Setting user in AuthContext:', response.user);
+      } else if (response && response.data && response.data.user) {
+        // Nested user object in response.data
+        setUser(response.data.user);
+        console.log('Setting user in AuthContext (nested):', response.data.user);
+      } else {
+        console.error('Unexpected register response structure:', response);
+        throw new Error('Invalid register response format');
       }
+      
       return response;
     } catch (err) {
       setError(err.message);

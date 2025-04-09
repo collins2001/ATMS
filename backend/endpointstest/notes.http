@@ -9,7 +9,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiO
 ### Create new note
 POST http://localhost:5000/api/notes
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0Mzc3MzI3NSwiZXhwIjoxNzQzODU5Njc1fQ.sCMS9QFyI7oKKPfcBZ52kItoE4HuR6brxgQ-EZWKfK0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJuZXd1c2VyQUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NDEzODE3MCwiZXhwIjoxNzQ0MjI0NTcwfQ.AdoW6jO0sTv_mISV1ds8qEedEOVpAcORSIJLvU9v8mo
 
 {
   "course": "CS101",
